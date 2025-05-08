@@ -1,0 +1,26 @@
+import tkinter as tk
+from textblob import TextBlob
+
+def analiziraj():
+    tekst = unos.get("1.0", tk.END)
+    polarnost = TextBlob(tekst).sentiment.polarity
+    if polarnost > 0:
+        rezultat.config(text="Pozitivno 😊")
+    elif polarnost < 0:
+        rezultat.config(text="Negativno 😠")
+    else:
+        rezultat.config(text="Neutralno 😐")
+
+app = tk.Tk()
+app.title("Analiza emocije")
+
+unos = tk.Text(app, height=5, width=40)
+unos.pack()
+
+dugme = tk.Button(app, text="Analiziraj", command=analiziraj)
+dugme.pack()
+
+rezultat = tk.Label(app, text="")
+rezultat.pack()
+
+app.mainloop()
